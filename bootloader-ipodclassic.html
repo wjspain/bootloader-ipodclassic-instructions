@@ -1,0 +1,278 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Rockbox on iPod Classic</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4345510-11', 'auto');
+  ga('send', 'pageview');
+</script>
+	</head>
+	<body>
+		<h1>Installation of the Rockbox bootloader on iPod Classic (80/120/160 GB)</h1>
+		<p><em>Last updated: 6 April 2017</em></p>
+		<p>This page will contain a link to the most recent version of the bootloader, until it gets merged into Rockbox, and the Classics become an officially supported target. When this happens, this page will redirect to Rockbox's installation instructions.</p>
+		<p>Current stable version: <strong>v1_0</strong> (28 February 2017)</p>
+		<p>Current legacy version: <strong>v8</strong> (31 January 2016, updated on 7 July 2016)</p>
+		<p>There is a GUI installer for Windows (<strong>Rockbox Utility</strong>). For Linux and Mac, there is a command-line tool <strong>mks5lboot</strong>, which can install, update or uninstall the bootloader.</p>
+		<p>
+			Jump to:
+			<a href="#compatibility">Compatibility</a>
+			|
+			Installation instructions for
+			<a href="#install_windows">Windows</a>,
+			<a href="#install_linux">Linux</a> or
+			<a href="#install_mac">Mac</a>
+			|
+			<a href="#dfu">DFU mode</a>
+			|
+			<a href="#download">Download</a>
+			<a href="#download_stable">stable</a>
+			or
+			<a href="#download_legacy">legacy</a>
+			|
+			<a href="#build_mks5lboot">Building mks5lboot</a>
+			|
+			<a href="#usage">Usage</a>
+			|
+			<a href="#support">Support</a>
+		</p>
+		<h2 id="compatibility">Compatibility</h2>
+		<p>All compatible iPod models are lited below.</p>
+		<table border="1">
+			<tbody>
+				<tr>
+					<th>Model Numbers</th>
+					<th>Capacity</th>
+					<th>Model Name (Wikipedia)</th>
+					<th>Model Name (freemyipod)</th>
+				</tr>
+				<tr>
+					<td>MB029, MB147</td>
+					<td>80 GB</td>
+					<td>6th Gen</td>
+					<td rowspan="2"><a href="https://www.freemyipod.org/wiki/Classic_1G" target="_blank">Classic 1G</a></td>
+				</tr>
+				<tr>
+					<td>MB145, MB150, PB145, PB150</td>
+					<td>160 GB</td>
+					<td>6th Gen</td>
+				</tr>
+				<tr>
+					<td>MB562, PB562, MB565, PB565</td>
+					<td>120 GB</td>
+					<td>6.5th Gen</td>
+					<td><a href="https://www.freemyipod.org/wiki/Classic_2G" target="_blank">Classic 2G</a></td>
+				</tr>
+				<tr>
+					<td>MC293, MC297, PC293, PC297</td>
+					<td>160 GB</td>
+					<td>7th Gen</td>
+					<td><a href="https://www.freemyipod.org/wiki/Classic_3G" target="_blank">Classic 3G</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<p><strong>IMPORTANT!</strong> Please check if your model number (in menu <strong>Settings</strong> - <strong>About</strong>) matches, before proceeding with the installation!</p>
+		<h2 id="install_windows">Installation instructions for Windows</h2>
+		<ol>
+			<li>Connect your iPod in normal mode (iTunes/file transfer).</li>
+			<li><a href="#download_stable">Get the EXE version</a> and start the executable.</li>
+			<li>When Rockbox Utility opens, select the checkbox named <strong>Show disabled targets</strong>, and point the installer to your iPod's drive letter (E:, F:, etc.).</li>
+			<li>On the installation screen make sure that <strong>Rockbox</strong> is selected and <strong>Bootloader</strong> is not selected. You can install themes or the game files if you want.</li>
+			<li>Start the Rockbox installation.</li>
+			<li>When the instllation is complete, select <strong>Bootloader</strong> and deselect all other options</li>
+			<li>Start the bootloader installation, and <strong>follow the on-screen instructions</strong>! They require you to <a href="#dfu">press certain buttons</a> at some point.</li>
+			<li>When the instllation is complete, you should have Rockbox up and running!</li>
+		</ol>
+		<p><strong>Please note that the video is outdated and does not represent the process described above! You can use it as a general overview of the dialogs and timings of the installation.</strong></p>
+		<p><iframe width="560" height="315" src="https://www.youtube.com/embed/TV1AyDfxeng" frameborder="0" allowfullscreen></iframe></p>
+		<h2 id="install_linux">Installation instructions for Linux</h2>
+		<ol>
+			<li>Connect your iPod in normal mode (iTunes/file transfer).</li>
+			<li>Download <a href="https://www.rockbox.org/wiki/RockboxUtility#Download" target="_blank">Rockbox Utility</a> for your operating system.</li>
+			<li>When Rockbox Utility opens, select the checkbox named <strong>Show disabled targets</strong>, and point the installer to your iPod's mount point.</li>
+			<li>On the installation screen make sure that <strong>Rockbox</strong> is selected and <strong>Bootloader</strong> is not selected (it should be grayed out anyway). You can install themes or the game files if you want.</li>
+			<li>Start the Rockbox installation.</li>
+			<li>Download <a href="bootloader-ipodclassic-v1_0/bootloader-ipod6g.ipod">the bootloader in .ipod format</a>.</li>
+			<li>Download <a href="#download_stable"><strong>mks5lboot</strong></a> for your operating system. Alternatively, you can <a href="#build_mks5lboot">build it</a> from the source code.</li>
+			<li>You need to have package <strong>libusb-1.0.0</strong> installed in order to run <strong>mks5lboot</strong>.</li>
+			<li>Start <strong>mks5lboot</strong> from a terminal with the following command-line: <strong>mks5lboot --dfuscan -l</strong>. It should scan for DFU devices every second.</li>
+			<li>Put your iPod in <a href="#dfu">DFU mode</a></li>
+			<li>When the device is detected, press CTRL+C to terminate the scan process, and proceed to the next step.</li>
+			<li>Start <strong>mks5lboot</strong> from a terminal with the following command-line: <strong>mks5lboot --bl-inst <em>path/to/bootloader-ipod6g.ipod</em></strong>, providing the correct path to <strong>bootloader-ipod6g.ipod</strong> that you downloaded earlier.</li>
+			<li>When the instllation is complete, you should have Rockbox up and running!</li>
+		</ol>
+		<h2 id="install_mac">Installation instructions for Mac</h2>
+		<p><strong>IMPORTANT!</strong> Please make sure that your iPod is formatted using <strong>FAT32</strong> (a.k.a. WinPod) before attempting to install the bootloader! Installation will not work on <strong>HFS/HFS+</strong> iPods (a.k.a. MacPods).</p>
+		<ol>
+			<li>Connect your iPod in normal mode (iTunes/file transfer).</li>
+			<li>Download <a href="https://www.rockbox.org/wiki/RockboxUtility#Download" target="_blank">Rockbox Utility</a> for your operating system.</li>
+			<li>When Rockbox Utility opens, select the checkbox named <strong>Show disabled targets</strong>, and point the installer to your iPod's mount point.</li>
+			<li>On the installation screen make sure that <strong>Rockbox</strong> is selected and <strong>Bootloader</strong> is not selected (it should be grayed out anyway). You can install themes or the game files if you want.</li>
+			<li>Start the Rockbox installation.</li>
+			<li>Download <a href="bootloader-ipodclassic-v1_0/bootloader-ipod6g.ipod">the bootloader in .ipod format</a>.</li>
+			<li>Download <a href="#download_stable"><strong>mks5lboot</strong></a> for your operating system. Alternatively, you can <a href="#build_mks5lboot">build it</a> from the source code.</li>
+			<li>You need to have package <strong>libusb</strong> installed using <a href="https://brew.sh/" target="_blank">Homebrew</a> (brew install libusb) or <a href="https://www.macports.org/" target="_blank">MacPorts</a> (port install libusb) in order to run <strong>mks5lboot</strong>.</li>
+			<li>Start <strong>mks5lboot</strong> from a terminal with the following command-line: <strong>mks5lboot --dfuscan -l</strong>. It should scan for DFU devices every second.</li>
+			<li>It is <strong>important</strong> to stop <strong>iTunes</strong> (dock icon -> Quit) and <strong>iTunesHelper</strong> (using Activity monitor, find the process and select Quit or Force quit if it keeps restarting) <strong>BEFORE</strong> continuing to the next step. Otherwise iTunes will put your iPod in wrong mode, and you will not be able to proceed with the installation.</li>
+			<li>Put your iPod in <a href="#dfu">DFU mode</a></li>
+			<li>When the device is detected, press CTRL+C to terminate the scan process, and proceed to the next step.</li>
+			<li>Start <strong>mks5lboot</strong> from a terminal with the following command-line: <strong>mks5lboot --bl-inst <em>path/to/bootloader-ipod6g.ipod</em></strong>, providing the correct path to <strong>bootloader-ipod6g.ipod</strong> that you downloaded earlier.</li>
+			<li>When the instllation is complete, you should have Rockbox up and running!</li>
+		</ol>
+		<h2 id="dfu">Entering DFU mode</h2>
+		<p>At some point during the instllation, you need to switch your iPod to DFU (device firmware update) mode. This has proven to be tricky, so here are additional instructions</p>
+		<ol>
+			<li>Lock the HOLD switch</li>
+			<li>Wait 1 second</li>
+			<li>Unlock the HOLD switch</li>
+			<li>Press and hold down MENU and CENTER at the same time</li>
+			<li>Wait 12 seconds - the timing is important, so either look at your computer's clock, or count to 12</li>
+			<li>Release both buttons</li>
+		</ol>
+		<p><iframe width="560" height="315" src="https://www.youtube.com/embed/Y_bIDtBohnE" frameborder="0" allowfullscreen></iframe></p>
+		<p>A device in DFU mode is hard to tell apart from a turned off device. The screen is completely black, nothing happens if you press any of the buttons. But if you connect it to a computer, the USB IDs are different - Product ID is 1223 (here's a <a href="https://www.freemyipod.org/wiki/Modes#Getting_DFU_mode_on_iPod_Classic.2C_Nano_3G_and_newer" target="_blank">table of iPod Product IDs</a>).</p>
+		<h2 id="download">Download</h2>
+		<h3>Which version should I use?</h3>
+		<p><strong>v1_0</strong>: Uses the new driver for Bootloader USB mode. It should work fine, while some people reported that Rockbox USB mode is slow or broken.</p>
+		<p><strong>v8</strong>: Does not provide Bootloader USB mode.</p>
+		<p>If you are using v1_0, please try if Bootloader USB mode works for you. If not, use Apple's Disk mode.</p>
+		<p>If you are using v8, please try if Rockbox USB mode works for you. If not, use Apple's Disk mode.</p>
+		<h3 id="download_stable">Stable version</h3>
+		<p>Includes the latest DesignWare USB driver. Enables using of bootloader USB mode (file transfers before Rockbox has loaded).</p>
+		<p><em>Please note that <strong>mk6gboot</strong> has been renamed to <strong>mks5lboot</strong>.</em></p>
+		<ul>
+			<li>
+				<a href="bootloader-ipodclassic-v1_0/Windows/RockboxBootloaderInstaller_iPodClassic_v1_0.exe">
+					<i class="fa fa-download" aria-hidden="true"></i>
+					Windows installer (EXE) (5.18 MB)
+				</a>
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v1_0/Windows/RockboxBootloaderInstaller_iPodClassic_v1_0.zip">
+					<i class="fa fa-download" aria-hidden="true"></i>
+					Windows binaries (ZIP) (8.66 MB)
+				</a> - includes RockboxUtility and mks5lboot (.exe), bootloader (.ipod), installed and uninstaller (.dfu)
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v1_0/Linux/mks5lboot.x86_64">
+					<i class="fa fa-download" aria-hidden="true"></i>
+					Linux build of mks5lboot (x86) (37 kB)
+				</a>
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v1_0/Linux/mks5lboot.x86">
+					<i class="fa fa-download" aria-hidden="true"></i>
+					Linux build of mks5lboot (x86_64) (44 kB)
+				</a>
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v1_0/Mac/mks5lboot">
+					<i class="fa fa-download" aria-hidden="true"></i>
+					Mac OS X build of mks5lboot (x86_64) (37 kB)
+				</a>
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v1_0/README.RockboxUtility.txt" target="_blank">
+					<i class="fa fa-book" aria-hidden="true"></i>
+					README (Rockbox Utility)
+				</a>
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v1_0/README.mks5lboot.txt" target="_blank">
+					<i class="fa fa-book" aria-hidden="true"></i>
+					README (mks5lboot)
+				</a>
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v1_0" target="_blank">
+					<i class="fa fa-folder-open" aria-hidden="true"></i>
+					Directory listing with all files included in the installer
+				</a>
+			</li>
+			<li>
+				<a href="http://gerrit.rockbox.org/r/#/c/1266/" target="_blank">
+					<i class="fa fa-code" aria-hidden="true"></i>
+					Source code of mks5lboot
+				</a>
+			</li>
+			<li>
+				<a href="http://gerrit.rockbox.org/r/#/c/1267/" target="_blank">
+					<i class="fa fa-code" aria-hidden="true"></i>
+					Source code of Rockbox Utility
+				</a>
+			</li>
+		</ul>
+		<h3 id="download_legacy">Legacy version</h3>
+		<ul>
+			<li>
+				<a href="bootloader-ipodclassic-v8/RockboxBootloaderInstaller_iPodClassic_v8.exe">
+					<i class="fa fa-download" aria-hidden="true"></i>
+					Windows installer (EXE) (5.17 MB)
+				</a>
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v8/RockboxBootloaderInstaller_iPodClassic_v8.zip">
+					<i class="fa fa-download" aria-hidden="true"></i>
+					Windows binaries (ZIP) (8.32 MB)
+				</a>
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v8/README.RockboxUtility.txt" target="_blank">
+					<i class="fa fa-book" aria-hidden="true"></i>
+					README (Rockbox Utility)
+				</a>
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v8/README.mk6gboot.txt" target="_blank">
+					<i class="fa fa-book" aria-hidden="true"></i>
+					README (mk6gboot)
+				</a>
+			</li>
+			<li>
+				<a href="bootloader-ipodclassic-v8/RockboxBootloaderInstaller_iPodClassic_v8/" target="_blank">
+					<i class="fa fa-folder-open" aria-hidden="true"></i>
+					Directory listing with all files included in the installer
+				</a>
+			</li>
+			<li>
+				<a href="http://gerrit.rockbox.org/r/#/c/1221/8" target="_blank">
+					<i class="fa fa-code" aria-hidden="true"></i>
+					Source code
+				</a>
+			</li>
+		</ul>
+		<h2 id="build_mks5lboot">Building mks5lboot from source</h2>
+		<p>You need git, GNU make and a compiler (gcc/clang). Also, you need to install the development package of libusb (called <strong>libusb-1.0.0-dev</strong> on Linux or <strong>libusb-dev</strong> on Mac)</p>
+		<ol>
+			<li>Clone Rockbox's Git repo using <strong>git clone git://git.rockbox.org/rockbox.git</strong>.</li>
+			<li>Change the directory to the just created <strong>rockbox</strong>, and enter the following command: <strong>git fetch git://git.rockbox.org/rockbox refs/changes/66/1266/12 && git checkout FETCH_HEAD</strong></li>
+			<li>Change the directory to <strong>rbutil/mks5lboot</strong>.</li>
+			<li>Build the tool using <strong>make</strong>.</li>
+		</ol>
+		<h2 id="usage">Usage</h2>
+		<h3>Turning on the iPod</h3>
+		<p>Unlock the HOLD switch, or press any button if already unlocked.</p>
+		<h3>Turning off the iPod when running Rockbox</h3>
+		<p>Hold down the PLAY button, until you see <em>Shutting down...</em></p>
+		<h3>Switching from Apple's firmware to Rockbox</h3>
+		<p>Hold down MENU+SELECT, until the iPod reboots. Release them immediately after the screen goes black.</p>
+		<h3>Switching from Rockbox to Apple's firmware</h3>
+		<p>Turn off the iPod, then turn it on and immediately lock the HOLD switch.</p>
+		<p>- OR -</p>
+		<p>Turn off the iPod, then turn it on and immediately hold down MENU.</p>
+		<h3>Entering Apple's Disk mode</h3>
+		<p>Turn off the iPod. Power it on by holding down SELECT+PLAY, keep holding until Disk mode starts.</p>
+		<h3>Entering Apple's Diagnostics mode</h3>
+		<p>Turn off the iPod. Power it on by holding down SELECT+LEFT, keep holding until Diagnostics mode starts.</p>
+		<h3>Entering Rockbox's Bootloader USB mode</h3>
+		<p>Turn off the iPod. Power it on by holding down SELECT+RIGHT, keep holding until you see the USB Mode message.</p>
+		<h2 id="support">Support</h2>
+		<p>If the installation is not successful, please ask for support at <a href="irc://irc.freenode.net/freemyipod-support">#freemyipod-support@irc.freenode.net</a> (or use <a href="http://webchat.freenode.net/?channels=freemyipod-support" target="_blank">webchat</a> if you don't have an IRC client installed)</p>
+	</body>
+</html>
